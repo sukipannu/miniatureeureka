@@ -1,6 +1,6 @@
+const PORT = process.env.PORT || 3001;
 const app =  express();
 const express = require('express'); 
-const PORT = process.env.PORT || 3001;
 const htmlRoutes = require('./routes/htmlRoutes');
 const apiRoutes = require('./routes/apiRoutes');
 
@@ -16,7 +16,7 @@ app.use('/', htmlRoutes);
 
 //PORT 
 app.listen(PORT, () => {
-    console.log(`App listening on PORT ${PORT}`);
+    console.log(`API server now on port ${PORT}`);
 });
 
 module.exports = app;
