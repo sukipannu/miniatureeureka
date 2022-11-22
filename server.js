@@ -1,16 +1,21 @@
-const express = require("express");
-const PORT = process.env.PORT || 3001;
+const htmlRoutes = require('./routes/htmlRoutes');
+const express = require('express');
 const app = express();
+const apiRoutes = require('./routes/apiRoutes');
+const PORT = process.env.PORT || 3001;
 
-app.use(express.urlencoded({ extended: true}));
-app.use(express.json());
+// Folder to retrieve CSS and JS Files
 app.use(express.static("public"));
 
-//server routes
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+// Middleware to parse the JSON data
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+app.use('/api', apiRoutes);
+app.use('/', htmlRoutes);
 
-//PORT
+// PORT
 app.listen(PORT, () => {
-    console.log(`listen on http://localhost:${PORT}`);
+    console.log(`App listening on PORT ${PORT}`);
 });
+
+module.exports = app;
