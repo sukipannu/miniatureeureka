@@ -1,4 +1,11 @@
 const fs = require("fs");
+const path = require("path");
+const { v4: uuivd4 } = require("uuid");
+const notes = require("../Develop/db/db.json");
+
+
+
+
 const util = require("util");
 const app = require("express").Router();
 const writeFileAsync = util.promisify(fs.writeFile);
@@ -7,7 +14,7 @@ var notesData;
 
 //Get request
 app.get("/notes", (req, res) => {
-    readFileAsync("db/db.json", "utf8").then(function (data) {
+    readFileAsync("develop/db/db.json", "utf8").then(function (data) {
         notesData = JSON.parse(data);
         res.json(notesData);
     });
@@ -15,24 +22,25 @@ app.get("/notes", (req, res) => {
 
 // POST request
 app.post("/notes", (req, res) => {
-    readFileAsync("db/db.json", "utf8").then(function (data) {
-        notesData = JSON.parse(data);
-
-        let newNote = req.body;
-        let currentID = notesData.length;
-
-        newNote.id = currentID + 1;
-
-        notesData.push(newNote);
-
-        notesData = JSON.stringify(notesData);
-
-        writeFileAsync("db/db.json", notesData).then(function (data) {
-            console.log("The note has been added");
-        });
-        res.json(notesData);
+    readFileAsync("Develop/db/db.json", "utf8").then(function (data) {
+      // Parse data to get an array of objects
+      notesData = JSON.parse(data);
+  
+      let newNote = req.body;
+      let currentID = notesData.length;
+  
+      newNote.id = currentID + 1;
+      // Add new note to the array of note objects
+      notesData.push(newNote);
+  
+      notesData = JSON.stringify(notesData);
+  
+      writeFileAsync("Develop/db/db.json", notesData).then(function (data) {
+        console.log("Note has been added.");
+      });
+      res.json(notesData);
     });
-});
+  });
 
 //BONUS DELETE POST REQUEST
 app.delete("/notes/:id", (req, res) => {
