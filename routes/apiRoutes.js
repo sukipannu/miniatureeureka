@@ -48,12 +48,12 @@ function deletesNote(id, notesArray) {
   
   module.exports = function (router) {
     // GET REQUEST
-    app.get("/api/notes", (req, res) => {
+    app.get("/notes", (req, res) => {
       res.json(notes.slice(1));
     });
   
     // POST REQUEST
-    app.post("/api/notes", (req, res) => {
+    app.post("/notes", (req, res) => {
       res.json(newNote);
     });
 
@@ -65,7 +65,7 @@ function deletesNote(id, notesArray) {
     // });
   
     // DELETE REQUEST
-    app.delete("/api/notes/:id", (req, res) => {
+    app.delete("/notes/:id", (req, res) => {
       deletesNote(req.params.id, notes);
       res.json(true);
     });
