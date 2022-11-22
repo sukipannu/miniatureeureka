@@ -2,8 +2,16 @@ const fs = require("fs");
 const path = require("path");
 const { v4: uuivd4 } = require("uuid");
 const notes = require("../Develop/db/db.json");
+const express = require('express');
+const app = require();
+const router = express.Router();
 
 //create note
+
+app.post('/', (req, res) => {
+  res.send('POST CREATED')
+});
+
 function createNewNote(body, notesArray) {
     const notes = body;
     if (!Array.isArray(notesArray))
@@ -40,20 +48,27 @@ function deletesNote(id, notesArray) {
   
   module.exports = function (router) {
     // GET REQUEST
-    router.get("/api/notes", (req, res) => {
+    app.get("/api/notes", (req, res) => {
       res.json(notes.slice(1));
     });
   
     // POST REQUEST
-    router.post("/api/notes", (req, res) => {
-      //  creates new note
-      const newNote = createsNewNote(req.body, notes);
+    app.post("/api/notes", (req, res) => {
       res.json(newNote);
     });
+
+
+    // app.post("/api/notes", (req, res) => {
+    //   //  creates new note
+    //   const newNote = createsNewNote(req.body, notes);
+    //   res.json(newNote);
+    // });
   
     // DELETE REQUEST
-    router.delete("/api/notes/:id", (req, res) => {
+    app.delete("/api/notes/:id", (req, res) => {
       deletesNote(req.params.id, notes);
       res.json(true);
     });
   };
+
+  module.exports = app;
