@@ -3,7 +3,7 @@ const path = require("path");
 const { v4: uuivd4 } = require("uuid");
 const notes = require("../Develop/db/db.json");
 const express = require('express');
-const app = require();
+const app = express();
 const router = express.Router();
 
 //create note
