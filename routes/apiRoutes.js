@@ -48,7 +48,7 @@ function deletesNote(id, notesArray) {
   
   module.exports = function (router) {
     // GET REQUEST
-    router.get("api//notes", (req, res) => {
+    router.get("api/notes", (req, res) => {
       res.json(notes.slice(1));
     });
   
